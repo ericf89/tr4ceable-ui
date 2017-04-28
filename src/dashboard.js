@@ -107,7 +107,7 @@ export default class Dashboard extends React.Component {
     const { loading, user, trackingNumber, viewer: { admin } } = this.state;
     return (
       <div>
-        <h2 className="App">
+        <h2 className="App" onClick={() => this.setState({trackingNumber: '9405511699000600435229'})}>
           Tr4ceable!
         </h2>
         <div style={{padding: 20 }}>

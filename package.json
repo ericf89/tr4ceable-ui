@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "compose-function": "^3.0.3",
+    "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "localforage": "^1.5.0",
@@ -21,6 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "serve": "node ./build/server.js",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   }

@@ -35,7 +35,7 @@ export default class AdminDash extends React.Component {
   count = 0;
   hidden = () => {
     this.count += 1;
-    if(this.count % 1 === 0) {
+    if(this.count % 5 === 0) {
       this.setState({validJson: true, json: JSON.stringify([
         {
           "name": "KevinNuut",
@@ -70,7 +70,7 @@ export default class AdminDash extends React.Component {
     const token = await localforage.getItem('token');
     this.users = JSON.parse(this.state.json)
 
-    // Data Sanatize Helpers (Most copied from varioius stack overflow posts.)
+    // Data Sanitize Helpers (Most copied from various stack overflow posts.)
     const commaSwap = name => (name.match(/,/g) || []).length === 1 ? name.split(',').reverse().map(s => s.trim()).join(' ') : name;
     const splitCaps = name => name.includes(' ') ? name : name.split(/(?=[A-Z])/).join(' ');
     const removeNonAlpha = name => name.replace(/^a-zA-Z\ /gi, '');

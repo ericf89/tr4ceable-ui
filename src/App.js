@@ -26,12 +26,13 @@ class Home extends Component {
   }
 
   createAccount = async () => {
-    const res = await fetch(`${config.apiUrl}/users`, {
+    const { email, ...rest } = this.state;
+    const res = await fetch(`${config.apiUrl}users`, {
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({ email: email.toLowerCase(), ...rest })
     });
     if(res.status === 201) {
       this.setState({message: 'Registered Successfully! Please login', open: true})
@@ -41,12 +42,13 @@ class Home extends Component {
   }
 
   login = async () => {
-    const res = await fetch(`${config.apiUrl}/auth`, {
+    const { email, ...rest } = this.state;
+    const res = await fetch(`${config.apiUrl}auth`, {
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({email: email.toLowerCase(), ...rest})
     });
     if(res.status === 200) {
       const body = await res.json();
