@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import TextField from 'material-ui/TextField';
 import Loading from 'material-ui/CircularProgress';
 import Snackbar from 'material-ui/Snackbar';
+import { Link } from 'react-router-dom';
 import config from './config';
 import User from './user';
 
@@ -80,6 +81,7 @@ export default class AdminDash extends React.Component {
             : (
               <div>
                 <TextField value={filter} floatingLabelText="Email Filter" onChange={({target: { value: filter } }) => this.setState({filter})} />
+                <Link to="/import">Import Users</Link>
                 <div>
                   { users.map(u => <User key={u._id} {...u} delete={this.deleteUser} />)}
                 </div>

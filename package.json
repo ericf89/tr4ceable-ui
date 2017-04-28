@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "compose-function": "^3.0.3",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "localforage": "^1.5.0",
+    "lodash.isequal": "^4.5.0",
+    "lodash.partition": "^4.6.0",
     "material-ui": "^0.17.4",
     "moment": "^2.18.1",
     "react": "^15.5.4",

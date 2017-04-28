@@ -9,6 +9,7 @@ import localforage from 'localforage';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import fetch from 'isomorphic-fetch';
 import jwtDecode from 'jwt-decode';
+import Import from './import';
 
 import './App.css';
 import Dashboard from './dashboard';
@@ -120,7 +121,8 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route path="/dashboard/:userId" component={Dashboard} />
             <Route exact path="/dashboard" component={AdminDashboard} />
-            <Route exact path="/logout" component={Logout} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/import" component={Import} />
           </div>
         </BrowserRouter>
       </MuiThemeProvider>
