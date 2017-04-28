@@ -4,7 +4,7 @@ import { Clear } from './dashboard';
 import moment from 'moment';
 import FlatButton from 'material-ui/FlatButton';
 
-const DivFull = styled.div`
+export const DivFull = styled.div`
   width: 90%;
   border: 1px solid #e6e6e6;
   padding: 25px;

@@ -9,6 +9,7 @@ import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar/Snackbar';
 import config from './config';
 import Package, { Detail } from './package';
+import { Link } from 'react-router-dom';
 
 export const Clear = styled.div`
   content: '';
@@ -21,7 +22,9 @@ export default class Dashboard extends React.Component {
     loading: true,
     open: false,
     message: '',
-    user: {}
+    user: {},
+    trackingNumber: '',
+    viewer: {}
   }
   async componentDidMount() {
     const token = await localforage.getItem('token');
@@ -29,7 +32,7 @@ export default class Dashboard extends React.Component {
       this.props.history.replace('/');
     } else {
       const viewer =jwtDecode(token);
-      this.setState(viewer);
+      this.setState({viewer});
       const res = await fetch(`${config.apiUrl}users/${this.props.match.params.userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,13 +43,14 @@ export default class Dashboard extends React.Component {
         if(this.props.match.params.userId === viewer._id) {
           this.props.history.push('/');
         } else {
-          this.props.history.push('/dashboard')
+          this.props.history.push(`/dashboard/${viewer._id}`)
         }
       }
       const user = await res.json();
       this.setState({user, packages: user.packages, loading: false});
     }
   }
+
   addNewPackage = async () => {
     const { userId } = this.props.match.params;
     const token = await localforage.getItem('token');
@@ -100,7 +104,7 @@ export default class Dashboard extends React.Component {
     }
   }
   render(){
-    const { loading, user, trackingNumber } = this.state;
+    const { loading, user, trackingNumber, viewer: { admin } } = this.state;
     return (
       <div>
         <h2 className="App">
@@ -110,6 +114,7 @@ export default class Dashboard extends React.Component {
           <h3>User Details</h3>
           <Detail label="Email" data={user.email || ''}/>
           <Detail label="Phone" data={user.phone || ''}/>
+          { admin ? <Link style={{float: 'right'}} to="/dashboard">Admin View</Link> : null}
         </div>
         <Clear/>
         <Snackbar

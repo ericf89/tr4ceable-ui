@@ -6,12 +6,13 @@ import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar/Snackbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import localforage from 'localforage';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import fetch from 'isomorphic-fetch';
 import jwtDecode from 'jwt-decode';
 
 import './App.css';
 import Dashboard from './dashboard';
+import AdminDashboard from './admin-dashboard';
 import config from './config';
 
 
@@ -99,6 +100,16 @@ class Home extends Component {
   }
 }
 
+class Logout extends React.Component {
+  state = { done: false }
+  async componentDidMount(){
+    await localforage.removeItem('token');
+    this.setState({done: true});
+  }
+  render() {
+    return this.state.done ? <Redirect to="/" /> : <div>Plz Hold</div>
+  }
+}
 
 class App extends Component {
   render() {
@@ -108,6 +119,8 @@ class App extends Component {
           <div>
             <Route exact path="/" component={Home}/>
             <Route path="/dashboard/:userId" component={Dashboard} />
+            <Route exact path="/dashboard" component={AdminDashboard} />
+            <Route exact path="/logout" component={Logout} />
           </div>
         </BrowserRouter>
       </MuiThemeProvider>
